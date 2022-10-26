@@ -1,17 +1,4 @@
-interface TableHead {
-  id: string;
-  name: string;
-}
-
-interface TableData {
-  headId: string;
-  data: string;
-}
-
-interface TableBody {
-  id: number;
-  content: TableData[];
-}
+import { TableHead, TableBody } from "../../types/Table";
 
 export default ({ head, body }: { head: TableHead[], body: TableBody[]}) => {
   const thead = (
