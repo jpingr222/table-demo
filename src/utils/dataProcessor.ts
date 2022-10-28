@@ -1,6 +1,4 @@
-import { SurveyResult } from "../types/SurveyResult";
-import { SurveySchema } from "../types/SurveySchema";
-import { TableHead, TableBody } from "../types/Table";
+import { SurveyResult, SurveySchema, TableHead, TableBody } from "../types";
 
 export const getPureQuestions = (questions: SurveySchema[]): TableHead[] => {
   const filterQuestion = questions.filter(q => !/S\d+|MetaInfo/.test(q.qname));

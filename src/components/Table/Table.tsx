@@ -1,4 +1,4 @@
-import { TableHead, TableBody } from "../../types/Table";
+import { TableHead, TableBody } from "../../types";
 
 export default ({ head, body }: { head: TableHead[], body: TableBody[]}) => {
   const thead = (
