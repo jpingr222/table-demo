@@ -1,5 +1,5 @@
 export interface SurveyResult {
-  ResponseId: number;
+  ResponseId: string;
   MainBranch: string;
   Employment: string;
   RemoteWork: string;
@@ -8,15 +8,15 @@ export interface SurveyResult {
   LearnCode: string;
   LearnCodeOnline: string;
   LearnCodeCoursesCert: string;
-  YearsCode: number;
-  YearsCodePro: number;
+  YearsCode: string;
+  YearsCodePro: string;
   DevType: string;
   OrgSize: string;
   PurchaseInfluence: string;
   BuyNewTool: string;
   Country: string;
   Currency: string;
-  CompTotal: number;
+  CompTotal: string;
   CompFreq: string;
   LanguageHaveWorkedWith: string;
   LanguageWantToWorkWith: string;
@@ -57,7 +57,7 @@ export interface SurveyResult {
   MentalHealth: string;
   TBranch: string;
   ICorPM: string;
-  WorkExp: number;
+  WorkExp: string;
   Knowledge_1: string;
   Knowledge_2: string;
   Knowledge_3: string;
@@ -77,5 +77,5 @@ export interface SurveyResult {
   TrueFalse_3: string;
   SurveyLength: string;
   SurveyEase: string;
-  ConvertedCompYearly: number;
+  ConvertedCompYearly: string;
 }

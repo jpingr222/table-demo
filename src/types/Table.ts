@@ -5,10 +5,10 @@ export interface TableHead {
 
 export interface TableData {
   headId: string;
-  data: string | number;
+  data: string;
 }
 
 export interface TableBody {
-  id: number;
+  id: string;
   content: TableData[];
 }
