@@ -1,6 +1,13 @@
 import { SurveyResult, SurveySchema, TableHead, TableBody } from "../types";
 
-export const getPureQuestions = (questions: SurveySchema[]): TableHead[] => {
+const PREVIEW_COLUMN_NUMBER: number = 10;
+
+/**
+ * Remove non-question contents from survey schema
+ * @param questions SurveySchema[]
+ * @returns TableHead[]
+ */
+export const surveyQuestionsTransformer = (questions: SurveySchema[]): TableHead[] => {
   const filterQuestion = questions.filter(q => !/S\d+|MetaInfo/.test(q.qname));
   return filterQuestion.map(q => {
     return {
@@ -10,12 +17,11 @@ export const getPureQuestions = (questions: SurveySchema[]): TableHead[] => {
   });
 }
 
-export const getGeneralQuestions = (questions: SurveySchema[]): TableHead[] => {
-  // const general = ['Age', 'Gender', 'Trans', 'Sexuality', 'Ethnicity', 'Accessibility', 'MentalHealth', 'WorkExp'];
-  return getPureQuestions(questions).slice(0, 10);
+export const getPreviewQuestions = (questions: SurveySchema[]): TableHead[] => {
+  return surveyQuestionsTransformer(questions).slice(0, PREVIEW_COLUMN_NUMBER);
 }
 
-export const getProcessedResults = (results: SurveyResult[]): TableBody[] => {
+export const surveyResultsTransformer = (results: SurveyResult[]): TableBody[] => {
   return results.map(r => {
     const {ResponseId, ...result} = r;
     const resultKeyValue = Object.entries(result).map(([key, value]) => {
