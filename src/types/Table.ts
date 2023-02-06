@@ -5,7 +5,7 @@ export interface TableHead {
 
 export interface TableData {
   headId: string;
-  data: string;
+  data: string | string[];
 }
 
 export interface TableBody {

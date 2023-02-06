@@ -2,7 +2,7 @@ export interface SurveySchema {
   qid: string;
   qname: string;
   question: string;
-  force_resp: boolean;
+  force_resp: string;
   type: string;
   selector: string;
 }
