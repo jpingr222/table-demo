@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -34,5 +34,24 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.container, .container-fluid {
+  width: 100%;
+  padding: 0 15px;
+  margin: 1.5rem auto 0;
+  box-sizing: border-box;
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
   }
 }
