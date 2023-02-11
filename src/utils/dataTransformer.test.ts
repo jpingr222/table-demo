@@ -4,6 +4,7 @@ import {
   getPreviewQuestions
 } from "./dataTransformer";
 import { SurveyResult, SurveySchema, TableBody, TableHead } from "../types";
+import originalReult from './../data/survey_results_data_part.json';
 
 const testQuestions: SurveySchema[] = [
   {
@@ -79,6 +80,41 @@ const expectResults: TableBody[] = [
   { id: '31', content: [{ headId: 'MainBranch', data: 'None of these' }, { headId: 'Employment', data: 'NA' }, { headId: 'RemoteWork', data: 'NA' }] }
 ];
 
+const testQuestionsMore: TableHead[] = [
+  { id: 'MainBranch', name: 'Which of the following options best describes you today? Here, by \"developer\" we mean \"someone who writes code.\" <b>*</b>' },
+  { id: 'Employment', name: 'Which of the following best describes your current employment status?' },
+  { id: 'RemoteWork', name: 'Which best describes your current work situation?' },
+  { id: 'CodingActivities', name: 'Which of the following best describes the code you write outside of work? Select all that apply.' },
+  { id: 'EdLevel', name: 'Which of the following best describes the highest level of formal education that you’ve completed? *' },
+  { id: 'LearnCode', name: 'How did you learn to code? Select all that apply.' },
+  { id: 'LearnCodeOnline', name: 'What online resources do you use to learn to code? Select all that apply.' },
+  { id: 'LearnCodeCoursesCert', name: 'What online courses or certifications do you use to learn to code? Select all that apply.' },
+  { id: 'YearsCode', name: 'Including any education, how many years have you been coding in total?' },
+  { id: 'YearsCodePro', name: 'NOT including education, how many years have you coded professionally (as a part of your work)?' },
+  { id: 'DevType', name: 'Which of the following describes your current job? Please select all that apply.' }
+];
+
+const expectQuestionsMore: TableHead[] = [
+  { id: 'MainBranch', name: 'Which of the following options best describes you today? Here, by \"developer\" we mean \"someone who writes code.\" <b>*</b>' },
+  { id: 'Employment', name: 'Which of the following best describes your current employment status?' },
+  { id: 'RemoteWork', name: 'Which best describes your current work situation?' },
+  { id: 'CodingActivities', name: 'Which of the following best describes the code you write outside of work? Select all that apply.' },
+  { id: 'EdLevel', name: 'Which of the following best describes the highest level of formal education that you’ve completed? *' },
+  { id: 'LearnCode', name: 'How did you learn to code? Select all that apply.' },
+  { id: 'LearnCodeOnline', name: 'What online resources do you use to learn to code? Select all that apply.' },
+  { id: 'LearnCodeCoursesCert', name: 'What online courses or certifications do you use to learn to code? Select all that apply.' },
+  { id: 'YearsCode', name: 'Including any education, how many years have you been coding in total?' },
+  { id: 'YearsCodePro', name: 'NOT including education, how many years have you coded professionally (as a part of your work)?' }
+];
+
+const expectPreviewResults: TableBody[] = [
+  { id: '7', content: [{ headId: 'MainBranch', data: 'I code primarily as a hobby' }, { headId: 'Employment', data: 'Student, part-time' }, { headId: 'RemoteWork', data: 'NA' }] },
+  { id: '8', content: [{ headId: 'MainBranch', data: 'I am a developer by profession' }, { headId: 'Employment', data: 'Not employed, but looking for work' }, { headId: 'RemoteWork', data: 'NA' }] },
+  { id: '12', content: [{ headId: 'MainBranch', data: 'I am not primarily a developer, but I write code sometimes as part of my work' }, { headId: 'Employment', data: 'Employed, full-time;Independent contractor, freelancer, or self-employed' }, { headId: 'RemoteWork', data: 'Fully remote' }] },
+  { id: '20', content: [{ headId: 'MainBranch', data: 'I am learning to code' }, { headId: 'Employment', data: 'Student, full-time' }, { headId: 'RemoteWork', data: 'NA' }] },
+  { id: '31', content: [{ headId: 'MainBranch', data: 'None of these' }, { headId: 'Employment', data: 'NA' }, { headId: 'RemoteWork', data: 'NA' }] }
+];
+
 describe('dataProcessor', () => {
   describe('surveyQuestionsTransformer', () => {
     it('should filter out non-question contents from survey schema', () => {
@@ -94,55 +130,36 @@ describe('dataProcessor', () => {
     });
   });
 
-  describe('getPreviewQuestions', () => {
-    it('should return first 10 questions', () => {
-      const moreQuestions = [
-        { qid: 'QID2', qname: 'MainBranch', question: 'Which of the following options best describes you today? Here, by \"developer\" we mean \"someone who writes code.\" <b>*</b>' },
-        { qid: 'QID296', qname: 'Employment', question: 'Which of the following best describes your current employment status?' },
-        { qid: 'QID308', qname: 'RemoteWork', question: 'Which best describes your current work situation?' },
-        { qid: 'QID297', qname: 'CodingActivities', question: 'Which of the following best describes the code you write outside of work? Select all that apply.' },
-        { qid: 'QID190', qname: 'S2', question: '<span style=\"font-size:22px; font-family: arial,helvetica,sans-serif; font-weight: 700;\">Education, work, and career</span><br />\n \n<p><span style=\"font-size:16px; font-family:arial,helvetica,sans-serif;\">This section will focus on your education, work, and career.<br />\n<br />\nMost questions in this section are optional. Required questions are noted with *.</span></p>' },
-        { qid: 'QID25', qname: 'EdLevel', question: 'Which of the following best describes the highest level of formal education that you’ve completed? *' },
-        { qid: 'QID276', qname: 'LearnCode', question: 'How did you learn to code? Select all that apply.' },
-        { qid: 'QID281', qname: 'LearnCodeOnline', question: 'What online resources do you use to learn to code? Select all that apply.' },
-        { qid: 'QID306', qname: 'LearnCodeCoursesCert', question: 'What online courses or certifications do you use to learn to code? Select all that apply.' },
-        { qid: 'QID32', qname: 'YearsCode', question: 'Including any education, how many years have you been coding in total?' },
-        { qid: 'QID34', qname: 'YearsCodePro', question: 'NOT including education, how many years have you coded professionally (as a part of your work)?' },
-        { qid: 'QID31', qname: 'DevType', question: 'Which of the following describes your current job? Please select all that apply.' }
-      ] as SurveySchema[];
-
-      const moreQuestionsTrans: TableHead[] = [
-        { id: 'MainBranch', name: 'Which of the following options best describes you today? Here, by \"developer\" we mean \"someone who writes code.\" <b>*</b>', },
-        { id: 'Employment', name: 'Which of the following best describes your current employment status?', },
-        { id: 'RemoteWork', name: 'Which best describes your current work situation?', },
-        { id: 'CodingActivities', name: 'Which of the following best describes the code you write outside of work? Select all that apply.', },
-        { id: 'EdLevel', name: 'Which of the following best describes the highest level of formal education that you’ve completed? *', },
-        { id: 'LearnCode', name: 'How did you learn to code? Select all that apply.', },
-        { id: 'LearnCodeOnline', name: 'What online resources do you use to learn to code? Select all that apply.', },
-        { id: 'LearnCodeCoursesCert', name: 'What online courses or certifications do you use to learn to code? Select all that apply.', },
-        { id: 'YearsCode', name: 'Including any education, how many years have you been coding in total?', },
-        { id: 'YearsCodePro', name: 'NOT including education, how many years have you coded professionally (as a part of your work)?', }
-      ];
-
-      const actual = getPreviewQuestions(moreQuestions);
-
-      expect(actual.length).toEqual(10);
-      expect(actual).toEqual(moreQuestionsTrans);
-    });
-
-    it('should return all questions when less than 10 questions', () => {
-      const actual = getPreviewQuestions(testQuestions);
-
-      expect(actual.length).toEqual(3);
-      expect(actual).toEqual(expectQuestions);
-    });
-  });
-
   describe('surveyResultsTransformer', () => {
     it('should transform survey results correctly', () => {
       const actual = surveyResultsTransformer(testResults);
 
       expect(actual).toEqual(expectResults);
     });
+
+    it('should combine some fields to one field as they are same question', () => {
+      const actual = surveyResultsTransformer(originalReult);
+      expect(actual[0].content.length).toEqual(57);
+    });
+  });
+
+  describe('getPreviewQuestions', () => {
+    it('should return first 10 questions', () => {
+      const actual = getPreviewQuestions(testQuestionsMore);
+
+      expect(actual.length).toEqual(10);
+      expect(actual).toEqual(expectQuestionsMore);
+    });
+
+    it('should return all questions when less than 10 questions', () => {
+      const actual = getPreviewQuestions(expectQuestions);
+
+      expect(actual.length).toEqual(3);
+      expect(actual).toEqual(expectQuestions);
+    });
+  });
+
+  describe('getPreviewResults', () => {
+    it('', () => {});
   });
 });
