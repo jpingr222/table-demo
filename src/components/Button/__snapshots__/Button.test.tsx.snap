@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button test should render a button with correct style 1`] = `
+<button
+  class="sc-bcXHqe iZcHbs"
+/>
+`;
+
+exports[`Button test should render an empty button correctly 1`] = `
+<button
+  class="sc-bcXHqe fzkNmB"
+/>
+`;
