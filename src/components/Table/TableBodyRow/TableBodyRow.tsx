@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { TableBody } from "../../../types";
+import Button from "../../Button";
 
 const StyledTbodyTr = styled.tr`
   &:nth-of-type(odd) {
@@ -28,10 +29,6 @@ const StyledTd = styled.td`
   border-bottom: 1px solid #495057;
   border-right: 1px solid #495057;
   word-wrap: break-word;
-
-  &.see-more:hover {
-    cursor: pointer;
-  }
 `;
 
 export interface TableBodyRowProps {
@@ -53,7 +50,7 @@ export default function TableBodyRow({
       {result.content.map(({headId, data}) => {
         return <StyledTd key={headId}>{data}</StyledTd>
       })}
-      <StyledTd className="see-more" onClick={handleOnClick}>...</StyledTd>
+      <StyledTd><Button onClick={handleOnClick}>...</Button></StyledTd>
     </StyledTbodyTr>
   );
 }
